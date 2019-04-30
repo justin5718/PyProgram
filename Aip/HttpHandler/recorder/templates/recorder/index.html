@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    <audio autoplay controls id="audio"></audio>
+    <div>
+        <button class="pure-button" onclick="startRecording()">录音</button>
+        <button class="pure-button" onclick="stopRecording()">停止</button>
+        <button class="pure-button" onclick="playRecording()">播放</button>
+        <button class="pure-button" onclick="uploadAudio()">提交</button>
+  </div>
+    <div id="log" style="max-height:400px;margin-top:10px;overflow-y:scroll;"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../static/js/hz.js"></script>
+    <script src="../static/js/index.js"></script>
+</body>
+</html>
