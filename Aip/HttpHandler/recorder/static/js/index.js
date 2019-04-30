@@ -15,3 +15,7 @@ var recorder;
         function uploadAudio() {
             recorder.upload();
         }
+        function fucktest() {
+            var languages = $("input[name='language']:checked").val();
+            alert(languages);
+        }

@@ -156,14 +156,18 @@
                 //console.log(curTime)
                 //let checkSum = md5(apikey+curTime+param);
 
+                var languages = $("input[name='language']:checked").val();
+                //alert(languages);
                 $.ajax({
                      type: "POST",
                      url: "/recorder/upload/",
-                     data: {'audio':audioBase64},
+                     data: {'audio':audioBase64,
+                            'language':languages
+                     },
                      dataType: "json",
                      contentType: "application/x-www-form-urlencoded;charset=utf-8",
                      success:function (data) {
-                         //alert(data);
+                         //window.alert(data);
                          window.location.href = "/recorder/result/"+data;
                      },
                  });
