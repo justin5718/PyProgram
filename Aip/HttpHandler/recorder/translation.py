@@ -1,10 +1,10 @@
 import requests, _md5, random, json
-
+#baidu api
 APP_ID = "20190413000287584"
 
 KEY = "tTSzz6Lowa9YOwJGJNt4"
 
-
+#raw translation
 def baidutras(text,lan):
     my_url = 'http://api.fanyi.baidu.com/api/trans/vip/translate'
     salty = random.randint(32768, 65536)
