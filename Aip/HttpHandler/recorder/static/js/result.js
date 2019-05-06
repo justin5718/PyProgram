@@ -1,26 +1,28 @@
 $(document).ready(function(){
-    $("h2#to").hide();
+    $("#to").hide();
 });
-var dd;
+var dd,e;
 
 var str = new String();
 
 var s = new Array();
 
 str = $("#to").text()
+//alert(str);
 s = str.split(' ');
 
 for (var i=0; i<s.length; i++){
-    var txt = $("<b></b>").text(s[i]);
-    $("#test").append(txt);
-    $("#test").append(" ");
+    var txt = $("<span style='font-size: 28px'></span>").text(s[i]);
+    $("#list").append(txt);
+    $("#list").append(" ");
 }
 
-$('b').hover(
+$('span').hover(
     function () {
         $("#222").empty();
         var d = $(this).text();
         qqq(d);
+        //$("#tospeak").attr("src",e);
     },
     function () {
 
@@ -69,14 +71,19 @@ function qqq(word){
             to: to,
             curtime: curtime,
             sign: sign,
-            signType: "v3"
+            signType: "v3",
+            ext: 'mp3'
         },
         dataType: "jsonp",
         success: function (data) {
             console.log(data['basic']['explains']);
             var t = data['basic']['explains'];
+            //$("#tospeak").attr("crossOrigin","anonymous");
+            //var is = document.getElementById("tospeak");
+            //is.play();
+            console.log(e);
             for (var i=0; i<t.length;i++){
-               var txt = $("<h2></h2>").text(t[i]);
+               var txt = $("<h4></h4>").text(t[i]);
                $("#222").append(txt);
             }
 

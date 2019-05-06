@@ -7,7 +7,7 @@ from .models import Wav, text
 from django.shortcuts import get_object_or_404
 from . import yysb as yysb
 from django.urls import reverse
-import base64, json
+import base64, json, time, random
 from googletrans import Translator
 
 # Create your views here.
@@ -32,7 +32,8 @@ def upaload(request):
         #content = request.POST.get('audio', None)
         #return HttpResponse(content)
         wavData = base64.b64decode(content)
-        contentName = "test.wav"
+        x = random.randint(0, 10000)
+        contentName = str(x) + ".wav"
         position = os.path.join(BASE_DIR, contentName)
         f = open(position, 'wb')
         f.write(wavData)
@@ -46,20 +47,29 @@ def upaload(request):
 #翻译
 def result(request, id):
     file = get_object_or_404(Wav, pk=id)
-    txt = yysb.RecognizationProcess(file.location)
-    #pro = trs.baidutras(txt,)
-    #pro = translation.translate(txt, dest='en').text
     t = text.objects.get(wav_id=id)
-    t.text_raw = txt
+    if t.text_raw == "notext":
+        txt = yysb.RecognizationProcess(file.location)
+        t.text_raw = txt
+        t.save()
     ss = t.language
-    pro = trs.baidutras(txt, ss)
-    t.text_processed = pro
-    t.save()
+    if t.text_processed == "no procession":
+        pro = trs.baidutras(txt, ss)
+        t.text_processed = pro
+        t.save()
     return render(request, 'recorder/result.html', {
-        'wav': txt,
+        'wav': t.text_raw,
         'title': file.filename,
-        'trans': pro,
+        'trans': t.text_processed,
     })
+
+#查询表格的后台请求，最新10条
+def table_list(request):
+    list = text.objects.order_by('-id')[:10]
+    content = {'latest_text_list':list}
+    return render(request, 'recorder/table-list.html', content)
+
+
 
 def test(request):
     return render(request, 'recorder/error.html')

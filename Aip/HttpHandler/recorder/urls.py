@@ -7,4 +7,5 @@ urlpatterns = [
     path('upload/', views.upaload, name="upload"),
     path('result/<id>', views.result, name="result"),
     path('test/',views.test, name="test"),
+    path('table/', views.table_list, name="table"),
 ]
